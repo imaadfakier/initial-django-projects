@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block scripts %}
+<script src="{% static 'sales/home.js' %}" defer></script>
+{% endblock scripts %}
+
+{% block title %}
+Home
+{% endblock title %}
+
+{% block content %}
+<!-- Modal -->
+<div class="modal fade" id="reportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Report</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- ... -->
+                <div id="alert-box"></div>
+                <form action="" id="report-form" autocomplete="off">
+                    {% csrf_token %}
+                    {{ report_form | crispy }}
+                    <button type="submit" class="btn btn-info mt-2">Save</button>
+                </form>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div>
+    </div>
+</div>
+
+<!-- Hello World -->
+<!-- {#{ h }#} -->
+<!-- {#{ hello }#} -->
+<hr>
+<!-- <form action="" method="POST">
+    {#% csrf_token %#}
+    {#{ form }#}
+    {#{ form | crispy }#}
+    <button type="submit" class="btn btn-primary mt-3">Search</button>
+</form> -->
+<!-- <form action="" method="POST">
+    {#% csrf_token %#}
+    {#{ form }#}
+    {#{ form | crispy }#}
+    {#{ search_form | crispy }#}
+    <button type="submit" class="btn btn-primary mt-3">Search</button>
+</form> -->
+{% if no_data %}
+    <div class="alert alert-warning" role="alert">
+        <!-- A simple warning alert—check it out! -->
+        {{ no_data }}
+    </div>
+{% endif %}
+<form action="" method="POST">
+    {% csrf_token %}
+    <!-- {#{ form }#} -->
+    <!-- {#{ form | crispy }#} -->
+    {{ search_form | crispy }}
+    <button type="submit" class="btn btn-primary mt-3">Search</button>
+</form>
+<br>
+{% if sales_df %}
+    Sales DF
+    <!-- {#{ sales_df }#} -->
+    {{ sales_df | safe }}
+    <br>
+    Positions DF
+    {{ positions_df | safe }}
+    <br>
+    Merged DF
+    {{ merged_df | safe }}
+    <br>
+    Group By DF
+    {{ df | safe }}
+    <br>
+    <!-- Chart -->
+    <img src="data:image/png;base64, {{ chart | safe }}" alt="" id="img">
+    <!-- <button class="btn btn-success">Report</button> -->
+<!-- {#% else %#} -->
+    <!-- <h3>No data!</h3> -->
+{% endif %}
+<br>
+<button class="btn btn-primary not-visible" id="report-btn" data-bs-toggle="modal" data-bs-target="#reportModal">Add Report</button>
+
+{% endblock content %}
+
+<!-- CSRF TOKEN example-->
+<!-- OaiJgUt8hldseKar3CgoqBsxmTwYupV1CPXsNb7E8PjxFzmyz512cVKExI8Z4d04 -->
+<!-- OaiJgUt8hldseKar3CgoqBsxmTwYupV1CPXsNb7E8PjxFzmyz512cVKExI8Z4d04 -->

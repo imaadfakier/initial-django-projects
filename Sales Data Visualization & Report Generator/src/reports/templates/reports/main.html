@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Reports
+{% endblock title %}
+
+{% block content %}
+    Reports
+    <!-- <br> -->
+    <hr>
+    {% for obj in object_list %}
+        <!-- <div class="card mb-3" style="width: 18rem;"> -->
+        <div class="card mb-3">
+            {% if obj.image %}
+                <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.name }}">
+            {% endif %}
+
+            <div class="card-body">
+                <!-- <h5 class="card-title">Card title</h5>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                    content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                <h5 class="card-title">{{ obj.name }}</h5>
+                <!-- <p class="card-text">{{ obj.remarks | truncatewords:2 }}</p> -->
+                <!-- <p class="card-text">{{ obj.remarks | truncatewords:1 }}</p> -->
+                <p class="card-text">{{ obj.remarks | truncatewords:2 }}</p>
+                <a href="{{ obj.get_absolute_url }}" class="btn btn-primary">Details</a>
+                <!-- <a href="" class="btn btn-danger">PDF</a> -->
+                <a href="{% url 'reports:pdf' obj.pk %}" class="btn btn-danger">PDF</a>
+            </div>
+        </div>
+        <!-- {#{ obj.name }#} -->
+        <!-- <a href="{{ obj.get_absolute_url }}">{{ obj.name }}</a> -->
+        <!-- <br> -->
+    {% endfor %}
+{% endblock content %}
