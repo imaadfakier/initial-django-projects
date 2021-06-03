@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Home Page</title>
+{% endblock title %}
+
+{% block content %}
+<div class="row">
+  <div class="col text-center">
+    <br>
+    <h2>Add Item(s):</h2>
+    <br>
+    <form action="{% url 'add_to_do_list_item' %}" method="post">
+      {% csrf_token %}
+      <!-- <input type="text" class="form-control mb-2 mr-sm-2" placeholder="Type here ..."> -->
+      <input type="text" name="content" class="form-control mb-2 mr-sm-2" placeholder="Type here ...">
+      <br>
+      <button type="submit" class="btn btn-lg btn-primary mb-2">Add</button>
+    </form>
+  </div>
+</div>
+<br>
+<div class="row">
+  <div class="col">
+    <ul class="list-group">
+      <!-- <li class="list-group-item active">Cras justo odio</li> -->
+      <!-- <li class="list-group-item">Cras justo odio</li>
+      <li class="list-group-item">Dapibus ac facilisis in</li>
+      <li class="list-group-item">Morbi leo risus</li>
+      <li class="list-group-item">Porta ac consectetur ac</li>
+      <li class="list-group-item">Vestibulum at eros</li> -->
+      {% if all_to_do_items.count > 0 %}
+        {% for to_do_item in all_to_do_items %}
+          <li class="list-group-item">
+            {{ to_do_item.text }}
+            <!-- <div class="float-right"> -->
+            <div class="float-right">
+              <form action="{% url 'delete_to_do_list_item' to_do_item.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+              </form>
+            </div>
+          </li>
+        {% endfor %}
+      {% else %}
+        <div class="alert alert-warning text-center" role="alert">
+          You really have nothing to do?! Seriously? C'mon ...
+        </div>
+      {% endif %}
+    </ul>
+  </div>
+</div>
+{% endblock content %}

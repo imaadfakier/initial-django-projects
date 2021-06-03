@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!--<h2>NEW SEARCH</h2>-->
+    <!--    <form action="{% url 'new_search' %}" method="post">-->
+    <!--        {% csrf_token %}-->
+    <!--        <input type="text" name="search" placeholder="Search">-->
+    <!--        &lt;!&ndash;<input type="submit" name="submit">&ndash;&gt;-->
+    <!--        <button class="btn waves-effect waves-light" type="submit" name="action">Submit-->
+    <!--            <i class="material-icons right">send</i>-->
+    <!--        </button>-->
+    <!--    </form>-->
+
+    <h2 style="text-align:center;">{{ search | title }}</h2>
+
+    <!--    {#% for post in final_postings %#}-->
+    <!--        <p>{#{ post.0 }#}</p>-->
+    <!--        <p>{#{ post.1 }#}</p>-->
+    <!--        <p>{#{ post.2 }#}</p>-->
+    <!--    {#% endfor %#}-->
+
+    <div class="row">
+        {% for post in final_postings %}
+            <div class="col s4">
+                <div class="card">
+                    <div class="card-image">
+                        <a href="{{ post.2 }}"><img src="{{ post.0 }}" alt=""></a>
+                    </div>
+                    <div class="card-content">
+                        <p>{{ post.1 }}</p>
+                    </div>
+                    <div class="card-action">
+                        <a href="{{ post.2 }}">View listing: Price {{ post.3 }}</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock content %}

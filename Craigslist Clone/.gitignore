@@ -1,0 +1,6 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+.idea/
+admin password.txt
+django_secret_key.py
