@@ -21,4 +21,4 @@ seaborn==0.11.1
 six==1.15.0
 sqlparse==0.4.2
 webencodings==0.5.1
-xhtml2pdf==0.2.5
+xhtml2pdf==0.2.17
